@@ -4,17 +4,23 @@ import { format } from 'date-fns'
 type Note = Database['public']['Tables']['notes']['Row']
 
 async function fetchNotes() {
+  // resolve自体はただのフラグ関数と思っていい
   await new Promise((resolve) => setTimeout(resolve, 2000))
+
   const res = await fetch(`${process.env.url}/rest/v1/notes?select=*`, {
     headers: new Headers({
       apikey: process.env.apikey as string,
     }),
     cache: 'no-store',
+    // 10秒間は再生成しない 無効期間ともいえる
     // next: { revalidate: 10 },
   })
+
   if (!res.ok) {
     throw new Error('Failed to fetch data in server')
   }
+
+  // notesの取得結果がjsonとして渡される
   const notes: Note[] = await res.json()
   return notes
 }

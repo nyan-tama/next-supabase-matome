@@ -9,7 +9,8 @@ export default function Page() {
     <main>
       <div className="m-10 text-center">
         <p>Hello World🚀</p>
-        <Suspense fallback={<Spinner color="border-green-500" />}>
+        {/* デフォでloading.tsxが読み込まれるが、suspenseでより細かく範囲を狭められる */}
+        <Suspense fallback={<Spinner color="border-green-500" />}> 
           {/* @ts-ignore*/}
           <NotesList />
         </Suspense>

@@ -6,6 +6,7 @@ export type Json =
   | { [key: string]: Json }
   | Json[]
 
+// このsupabaseから用意した定義が違うとちゃんとエラーになる
 export interface Database {
   public: {
     Tables: {
