@@ -8,7 +8,7 @@ async function fetchBlogs() {
     headers: new Headers({
       apikey: process.env.apikey as string,
     }),
-    // cache: 'no-store',
+    // cache: 'no-store', //ダイナミック(動的)なのでssr化
   })
   if (!res.ok) {
     throw new Error('Failed to fetch data in server')

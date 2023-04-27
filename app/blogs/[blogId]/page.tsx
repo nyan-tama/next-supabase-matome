@@ -25,9 +25,13 @@ async function fetchBlog(blogId: string) {
   //     throw new Error('Failed to fetch data in server')
   //   }
   const blogs: Blog[] = await res.json()
+  // 取得結果は一つなので、先頭要素だけでいい
   return blogs[0]
 }
 
+// paramsはpagePropsにあるプロパティ、分割代入で取り出せる
+// paramsのもととなる情報はlayoutに含まれているが、どうやらその影響で取得できるらしい。取得方法、関係性がちょっと不明
+// <Link href={`/blogs/${blog.id}`}>{blog.title}</Link>とあるので、url構造から判断しているのだと思われる。
 export default async function BlogDetailPage({ params }: PageProps) {
   const blog = await fetchBlog(params.blogId)
   if (!blog) return notFound()
@@ -52,6 +56,9 @@ export default async function BlogDetailPage({ params }: PageProps) {
     </div>
   )
 }
+
+// スタティックの場合は事前に生成するblogidリストが必要となる
+// そのためにはgenerateStaticParamsを使って、blogidを含めたblogsを用意する
 export async function generateStaticParams() {
   const res = await fetch(`${process.env.url}/rest/v1/blogs?select=*`, {
     headers: new Headers({

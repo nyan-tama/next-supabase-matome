@@ -49,6 +49,7 @@ export default function EditTask() {
           className="my-2 rounded border border-gray-300 px-3 py-2 text-sm placeholder-gray-500 focus:outline-none"
           placeholder="New task ?"
           value={editedTask.title || ''}
+          // スプレッド構文（...）を使用すると、オブジェクトのすべてのプロパティと値が新しいオブジェクトにコピーされます。これにより、editedTask の現在の状態を維持しながら、新しいオブジェクトを作成できます。
           onChange={(e) => updateTask({ ...editedTask, title: e.target.value })}
         />
         <button

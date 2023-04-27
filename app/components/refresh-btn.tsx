@@ -1,3 +1,6 @@
+// CC
+// router.refresh()によって、画面を再レンダリングしなくてもデータを更新できる
+// よって内部の変数は維持される
 'use client'
 import { useRouter } from 'next/navigation'
 
